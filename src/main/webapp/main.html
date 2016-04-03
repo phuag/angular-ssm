@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head ng-app="ssmApp">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="ico/favicon.ico">
+    <title>ssm EXAMPLE APP</title>
+    <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body ng-controller="MainController">
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+
+    </div><!-- navbar-->
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="btn-group btn-group-sm">
+                        <a class="btn btn-default"
+                           ng-class="(language() == 'zh_CN') ? 'btn-primary' : ''"
+                           ng-click="setLanguage('zh_CN')">简体中文</a> <a
+                           class="btn btn-default"
+                           ng-class="(language() == 'en') ? 'btn-primary' : ''"
+                           ng-click="setLanguage('en')">English</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="center-block">&copy;2016 phuag.com, all
+                        rights reserved.</div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script type="text/javascript" src="js/init.js"></script>
+    <script type="text/javascript" src="js/controller.js"></script>
+    <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="bower_components/angular/angular.js"></script>
+    <script type="text/javascript" src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script type="text/javascript" src="bower_components/angular-messages/angular-messages.js"></script>
+    <script type="text/javascript" src="bower_components/angular-resource/angular-resource.js"></script>
+    <script type="text/javascript" src="bower_components/angular-route/angular-route.js"></script>
+    <script>
+        $.material.init();
+    </script>
+  </body>
+</html>
