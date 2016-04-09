@@ -26,6 +26,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class UserRealm extends AuthorizingRealm {
 
+    public SysUserService getSysUserService() {
+        return sysUserService;
+    }
+
+    public void setSysUserService(SysUserService sysUserService) {
+        this.sysUserService = sysUserService;
+    }
+
     @Autowired
     private SysUserService sysUserService;
 
@@ -48,21 +56,21 @@ public class UserRealm extends AuthorizingRealm {
             PrincipalCollection principals) {
         String username = (String) principals.getPrimaryPrincipal();
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
-        BIConversion.User user = sysUserService.getSysuserByLoginName(username);
-        Set<Role> uroles = user.getRoles();
+        SysUser user = sysUserService.getSysuserByLoginName(username);
+//        Set<Role> uroles = user.getRoles();
         Set<String> perms = new HashSet<String>();
-        for (Role role : uroles) {
-            Set<Resource> resources = role.getResources();
-            for (Resource resource : resources) {
-                Object permission = resource.getPerms();
-                if (permission == null
-                        || StringUtils.isEmpty(permission.toString())) {
-                    continue;
-                }
-                perms.add(StringUtils.substringBetween(permission.toString(),
-                        "perms[", "]"));
-            }
-        }
+//        for (Role role : uroles) {
+//            Set<Resource> resources = role.getResources();
+//            for (Resource resource : resources) {
+//                Object permission = resource.getPerms();
+//                if (permission == null
+//                        || StringUtils.isEmpty(permission.toString())) {
+//                    continue;
+//                }
+//                perms.add(StringUtils.substringBetween(permission.toString(),
+//                        "perms[", "]"));
+//            }
+//        }
         authorizationInfo.setStringPermissions(perms);
         return authorizationInfo;
     }

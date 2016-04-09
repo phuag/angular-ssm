@@ -23,10 +23,14 @@
   ],
   "dependencies": {
     "angular": "^1.5.3",
-    "angular-cookies":"^1.5.3",
-    "angular-messages":"^1.5.3",
-    "angular-resource":"^1.5.3",
-    "angular-route":"^1.5.3",
-    "bootstrap": "^3.3.6"
+    "angular-cookies": "^1.5.3",
+    "angular-messages": "^1.5.3",
+    "angular-resource": "^1.5.3",
+    "angular-route": "^1.5.3",
+    "bootstrap": "^3.3.6",
+    "bootstrap-material-design": "0.5.9",
+    "angular-aria": "^1.5.3",
+    "jquery-i18n-properties": "^1.2.2",
+    "AdminLTE": "admin-lte#^2.3.3"
   }
 }

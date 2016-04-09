@@ -90,8 +90,4 @@
         <url-pattern>/druid/*</url-pattern>
     </servlet-mapping>
 
-    <welcome-file-list>
-        <welcome-file>/login/login.html</welcome-file>
-    </welcome-file-list>
-
 </web-app>
