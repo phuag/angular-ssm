@@ -1,111 +1,111 @@
 //Define a function scope, variables used inside it will NOT be globally visible.
-(function () {
+(function() {
 
     var
-            //the HTTP headers to be used by all requests
-            httpHeaders,
-            //the message to be shown to the user
-            message,
-            //Define the main module.
-            //The module is accessible everywhere using "angular.module('angularspring')", therefore global variables can be avoided totally.
-            as = angular.module('ssmApp', ['ngRoute', 'ngResource', 'ngCookies', 'ui.bootstrap', 'ngMessages', 'ssmApp.i18n', 'ssmApp.services', 'ssmApp.controllers', 'ssmApp.filters']);
+    //the HTTP headers to be used by all requests
+        httpHeaders,
+        //the message to be shown to the user
+        message,
+        //Define the main module.
+        //The module is accessible everywhere using "angular.module('angularspring')", therefore global variables can be avoided totally.
+        as = angular.module('ssmApp', ['ui.router', 'ngResource', 'ngCookies', 'ui.bootstrap', 'ngMessages', 'ssmApp.i18n', 'ssmApp.services', 'ssmApp.controllers', 'ssmApp.filters']);
 
-    as.config(function ($routeProvider, $httpProvider) {
-        //configure the rounting of ng-view
-        $routeProvider
-                .when('/',
-                        {templateUrl: 'partials/home.html',
-                            publicAccess: true})
-                .when('/home',
-                        {templateUrl: 'partials/home.html',
-                            publicAccess: true})
-                .when('/login',
-                        {templateUrl: 'partials/login.html',
-                            publicAccess: true})
-                .when('/posts',
-                        {controller: 'PostsController',
-                            templateUrl: 'partials/posts/home.html'})
-                .when('/posts/new',
-                        {controller: 'NewPostController',
-                            templateUrl: 'partials/posts/new.html'})
-                .when('/posts/:id',
-                        {controller: 'DetailsController',
-                            templateUrl: 'partials/posts/details.html'});
+    as.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
+        function($stateProvider, $urlRouterProvider, $httpProvider) {
+            //configure the rounting of ng-view
+            $urlRouterProvider
+                .when('','/staffs')
+                .otherwise("/404");
+            $stateProvider
+                .state('staffs', {
+                    url: "/staffs",
+                    templateUrl: 'partials/staffs.html',
+                    controller: 'StaffsController'
+                })
+                .state('anotherLink', {
+                    url: "/anotherLink",
+                    templateUrl: 'partials/anotherLink.html'
+                })
+                .state('404', {
+                    url: "/404",
+                    templateUrl: 'partials/404.html'
+                });
 
 
-        //configure $http to catch message responses and show them
-        $httpProvider.interceptors.push(function ($q) {
-            var setMessage = function (response) {
-                //if the response has a text and a type property, it is a message to be shown
-                if (response.data.text && response.data.type) {
-                    message = {
-                        text: response.data.text,
-                        type: response.data.type,
-                        show: true
-                    };
-                }
-            };
+            //configure $http to catch message responses and show them
+            $httpProvider.interceptors.push(function($q) {
+                var setMessage = function(response) {
+                    //if the response has a text and a type property, it is a message to be shown
+                    if (response.data.text && response.data.type) {
+                        message = {
+                            text: response.data.text,
+                            type: response.data.type,
+                            show: true
+                        };
+                    }
+                };
 
-            return {
-                //this is called after each successful server request
-                'response': function (response) {
-                    // console.log('request:' + response);
-                    setMessage(response);
-                    return response || $q.when(response);
-                },
-                //this is called after each unsuccessful server request
-                'responseError': function (response) {
-                    //console.log('requestError:' + response);
-                    setMessage(response);
-                    return $q.reject(response);
-                }
+                return {
+                    //this is called after each successful server request
+                    'response': function(response) {
+                        // console.log('request:' + response);
+                        setMessage(response);
+                        return response || $q.when(response);
+                    },
+                    //this is called after each unsuccessful server request
+                    'responseError': function(response) {
+                        //console.log('requestError:' + response);
+                        setMessage(response);
+                        return $q.reject(response);
+                    }
 
-            };
-        });
+                };
+            });
 
-        $httpProvider.interceptors.push(function ($rootScope, $q) {
+            $httpProvider.interceptors.push(function($rootScope, $q) {
 
-            return {
-                'request': function (config) {
-                    // console.log('request:' + config);
-                    return config || $q.when(config);
-                },
-                'requestError': function (rejection) {
-                    // console.log('requestError:' + rejection);
-                    return rejection;
-                },
-                //success -> don't intercept
-                'response': function (response) {
-                    // console.log('response:' + response);
-                    return  response || $q.when(response);
-                },
-                //error -> if 401 save the request and broadcast an event
-                'responseError': function (response) {
-                    console.log('responseError:' + response);
-                    if (response.status === 401) {
-                        var deferred = $q.defer(),
+                return {
+                    'request': function(config) {
+                        // console.log('request:' + config);
+                        return config || $q.when(config);
+                    },
+                    'requestError': function(rejection) {
+                        // console.log('requestError:' + rejection);
+                        return rejection;
+                    },
+                    //success -> don't intercept
+                    'response': function(response) {
+                        // console.log('response:' + response);
+                        return response || $q.when(response);
+                    },
+                    //error -> if 401 save the request and broadcast an event
+                    'responseError': function(response) {
+                        console.log('responseError:' + response);
+                        if (response.status === 401) {
+                            var deferred = $q.defer(),
                                 req = {
                                     config: response.config,
                                     deferred: deferred
                                 };
-                        $rootScope.requests401.push(req);
-                        $rootScope.$broadcast('event:loginRequired');
-                        return deferred.promise;
+                            $rootScope.requests401.push(req);
+                            $rootScope.$broadcast('event:loginRequired');
+                            return deferred.promise;
+                        }
+                        return $q.reject(response);
                     }
-                    return $q.reject(response);
-                }
 
-            };
-        });
+                };
+            });
 
 
-        httpHeaders = $httpProvider.defaults.headers;
-    });
+            httpHeaders = $httpProvider.defaults.headers;
+        }
+    ]);
 
 
-    as.run(function ($rootScope, $http, $route, $location, base64) {
+    as.run(function($rootScope, $http, $location, base64) {
         //make current message accessible to root scope and therefore all scopes
-        $rootScope.message = function () {
+        $rootScope.message = function() {
             return message;
         };
 
@@ -114,7 +114,7 @@
          */
         $rootScope.requests401 = [];
 
-        $rootScope.$on('event:loginRequired', function () {
+        $rootScope.$on('event:loginRequired', function() {
             //$('#login').modal('show');
             $location.path('/login');
         });
@@ -122,14 +122,14 @@
         /**
          * On 'event:loginConfirmed', resend all the 401 requests.
          */
-        $rootScope.$on('event:loginConfirmed', function () {
+        $rootScope.$on('event:loginConfirmed', function() {
             var i,
-                    requests = $rootScope.requests401,
-                    retry = function (req) {
-                        $http(req.config).then(function (response) {
-                            req.deferred.resolve(response);
-                        });
-                    };
+                requests = $rootScope.requests401,
+                retry = function(req) {
+                    $http(req.config).then(function(response) {
+                        req.deferred.resolve(response);
+                    });
+                };
 
             for (i = 0; i < requests.length; i += 1) {
                 retry(requests[i]);
@@ -142,36 +142,37 @@
         /**
          * On 'event:loginRequest' send credentials to the server.
          */
-        $rootScope.$on('event:loginRequest', function (event, username, password) {
+        $rootScope.$on('event:loginRequest', function(event, username, password) {
             httpHeaders.common['Authorization'] = 'Basic ' + base64.encode(username + ':' + password);
             console.log('httpHeaders.common[\'Authorization\']@' + httpHeaders.common['Authorization'] + ':::' + username + ':' + password);
             $http.get('api/me')
-                    .success(function (data) {
-                        $rootScope.authenticated = true;
-                        $rootScope.name = data.username;
-                        $rootScope.$broadcast('event:loginConfirmed');
-                    })
-                    .error(function (data) {
-                        console.log('login failed...@' + data);
-                    });
+                .success(function(data) {
+                    $rootScope.authenticated = true;
+                    $rootScope.name = data.username;
+                    $rootScope.$broadcast('event:loginConfirmed');
+                })
+                .error(function(data) {
+                    console.log('login failed...@' + data);
+                });
         });
 
         /**
          * On 'logoutRequest' invoke logout on the server and broadcast 'event:loginRequired'.
          */
-        $rootScope.$on('event:logoutRequest', function () {
+        $rootScope.$on('event:logoutRequest', function() {
             $rootScope.authenticated = false;
             delete $rootScope.name;
             delete httpHeaders.common['Authorization'];
         });
 
         var routesOpenToPublic = [];
-        angular.forEach($route.routes, function (route, path) {
+        /*
+        angular.forEach($routeProvider.routes, function(route, path) {
             // push route onto routesOpenToPublic if it has a truthy publicAccess value
             route.publicAccess && (routesOpenToPublic.push(path));
-        });
+        });*/
 
-        $rootScope.$on('$routeChangeStart', function (event, nextLoc, currentLoc) {
+        $rootScope.$on('$routeChangeStart', function(event, nextLoc, currentLoc) {
             //console.log('fire event@$routeChangeStart');
             var closedToPublic = (-1 === routesOpenToPublic.indexOf($location.path()));
             if (closedToPublic && !$rootScope.authenticated) {
@@ -191,11 +192,15 @@
         //check the networking connection.
 
         $http.get('api/ping')
-                .success(function (data) {
-                    console.log("ping result@"+data);
-                })
-                .error(function (data) {
-                     $rootScope.message={text:'Network connection eror!', type:'danger', show:true};
-                });
+            .success(function(data) {
+                console.log("ping result@" + data);
+            })
+            .error(function(data) {
+                $rootScope.message = {
+                    text: 'Network connection eror!',
+                    type: 'danger',
+                    show: true
+                };
+            });
     });
 }());

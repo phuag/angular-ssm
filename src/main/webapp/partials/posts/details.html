@@ -31,11 +31,10 @@
                         <msg key="comment"></msg>
                     </h4>
                 </div>
-                <div class="modal-body"> 
+                <div class="modal-body">
                     <div class="form-group" ng-class="{'has-error':commentForm.content.$invalid && !commentForm.content.$pristine }">
                         <div class="col-md-12">
-                            <textarea name="content" class="form-control" type="text" placeholder="Comment on post"
-                                      ng-model="newComment.content" rows="8" ng-required="true" ng-minlength="10"></textarea>
+                            <textarea name="content" class="form-control" type="text" placeholder="Comment on post"ng-model="newComment.content" rows="8" ng-required="true" ng-minlength="10"></textarea>
                             <p ng-show="commentForm.content.$invalid" class="help-block">At least 10 chars.</p>
                         </div>
                     </div>

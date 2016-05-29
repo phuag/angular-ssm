@@ -38,4 +38,54 @@
         // $('#login').modal('hide');
     };
   });
+
+
+  as.controller('StaffsController',function($scope,$rootScope,$http,base64,$location){
+        $scope.p = 1;//page
+        $scope.pSize = 10;
+        $scope.q = '';//query
+        // $scope.statusOpt = {'label': $.i18n.prop('ALL'), 'value': 'ALL'};
+        // $scope.statusOpts = [
+        //     {'label': $.i18n.prop('ALL'), 'value': 'ALL'},
+        //     {'label': $.i18n.prop('DRAFT'), 'value': 'DRAFT'},
+        //     {'label': $.i18n.prop('PUBLISHED'), 'value': 'PUBLISHED'}
+        // ];
+
+
+
+        var actionUrl = 'api/staff/',
+                load = function () {
+                    $http.get(actionUrl + '?size=' + $scope.pSize
+                            + '&page=' + $scope.p)
+                            .success(function (data) {
+                                $scope.staffs = data.list;
+                                $scope.totalItems = data.total;
+                            });
+                };
+
+        load();
+
+        $scope.search = function () {
+            load();
+        };
+
+        $scope.toggleStatus = function (r) {
+            $scope.statusOpt = r;
+        };
+
+        $scope.add = function () {
+            $location.path('/users/new');
+        };
+
+        $scope.delUser = function (idx) {
+            console.log('delete index @' + idx + ', id is@' + $scope.users[idx].id);
+            if (confirm($.i18n.prop('confirm.delete'))) {
+                $http.delete(actionUrl + $scope.posts[idx].id)
+                        .success(function () {
+                            $scope.users.splice(idx, 1);
+                        });
+            }
+        };
+
+    });
 }());

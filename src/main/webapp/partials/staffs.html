@@ -1,0 +1,67 @@
+<!-- 内容页面的标题栏 -->
+<section class="content-header">
+  <h1>
+    link Header
+    <small>Optional description</small>
+  </h1>
+
+</section>
+
+<!-- 主内容 -->
+<section class="content">
+<div class="row">
+  <div class="box">
+    <div class="box-header">
+      <h3 class="box-title">人员信息</h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+      <table id="staffs212" class="table table-bordered table-striped">
+        <thead>
+        <tr>
+          <th>
+              <msg key="staff.staffId"></msg>
+          </th>
+          <th>
+              <msg key="staff.staffName"></msg>
+          </th>
+          <th>
+              <msg key="staff.staffSex"></msg>
+          </th>
+          <th>
+              <msg key="staff.staffAge"></msg>
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="staff in staffs">
+              <td>{{staff.staffId}}</td>
+              <td>{{staff.staffName}}</td>
+              <td>{{staff.staffSex}}</td>
+              <td>{{staff.staffAge}}</td>
+          </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+          <th>
+              <msg key="staff.staffId"></msg>
+          </th>
+          <th>
+              <msg key="staff.staffName"></msg>
+          </th>
+          <th>
+              <msg key="staff.staffSex"></msg>
+          </th>
+          <th>
+              <msg key="staff.staffAge"></msg>
+          </th>
+        </tr>
+        </tfoot>
+      </table>
+    </div>
+    <!-- /.box-body -->
+  </div>
+  <!-- /.box -->
+</div>
+<uib-pagination boundary-links="true" total-items="totalItems" ng-model="p" ng-change="search()" class="pagination pagination-lg" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></uib-pagination>
+</section>

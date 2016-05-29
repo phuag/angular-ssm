@@ -1,7 +1,7 @@
 package com.phuag.sample.service;
 
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.phuag.sample.dao.StaffMapper;
 import com.phuag.sample.model.Staff;
 import org.springframework.data.domain.Pageable;
@@ -33,11 +33,12 @@ public class StaffService {
         return staffMapper.selectByPrimaryKey(staffId);
     }
 
-    public Page<Staff> getAllStaff(Pageable page) {
+    public PageInfo<Staff> getAllStaff(Pageable page) {
         PageHelper.startPage(page.getPageNumber(), page.getPageSize());
         //TODO need to add sort function ,but the pagerhelper is not support well.
         //PageHelper.orderBy("STAFF_NAME desc");
-        return (Page<Staff>) staffMapper.selectAll();
+        List<Staff> staffs = staffMapper.selectAll();
+        return new PageInfo<Staff>(staffs);
     }
 
 

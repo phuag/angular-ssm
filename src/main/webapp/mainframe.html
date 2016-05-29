@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="ssmApp">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>phuag | frame</title>
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+        <!-- Bootstrap 3.3.6 -->
+        <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+        <!-- Ionicons -->
+        <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.min.css">
+        <!-- Theme style -->
+        <link rel="stylesheet" href="bower_components/AdminLTE/dist/css/AdminLTE.min.css">
+        <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
+          page. However, you can choose any other skin. Make sure you
+          apply the skin class to the body tag so the changes take effect.
+    -->
+        <link rel="stylesheet" href="bower_components/AdminLTE/dist/css/skins/skin-blue.min.css">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]> <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script> <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script> <![endif]-->
+    </head>
+    <body class="hold-transition skin-blue sidebar-mini" ng-controller="MainController">
+        <!-- 所有内容均放在 wrapper中 -->
+        <div class="wrapper">
+            <!-- Main Header 包含logo和工具栏-->
+            <header class="main-header">
+                <!-- Logo -->
+                <a class="logo">
+                    <!-- mini logo for sidebar mini 50x50 pixels -->
+                    <span class="logo-mini">
+                        <b>后</b>台</span>
+                    <!-- logo for regular state and mobile devices -->
+                    <span class="logo-lg">
+                        <b>后端</b>管理系统</span>
+                </a>
+                <!-- 顶部标题栏 -->
+                <nav class="navbar navbar-static-top" role="navigation">
+                    <!-- 侧边栏 固定按钮-->
+                    <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                        <span class="sr-only">Toggle navigation</span>
+                    </a>
+                    <!-- 顶部标题栏右边菜单 -->
+                    <div class="navbar-custom-menu">
+                        <ul class="nav navbar-nav">
+                            <!-- 消息通知栏 -->
+                            <li class="dropdown messages-menu">
+                                <!-- 菜单弹出按钮-->
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="fa fa-envelope-o"></i>
+                                    <span class="label label-success">4</span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li class="header">You have 4 messages</li>
+                                    <li>
+                                        <!-- 内部菜单:包含消息 -->
+                                        <ul class="menu">
+                                            <li>
+                                                <!-- 消息开始 -->
+                                                <a href="#">
+                                                    <div class="pull-left">
+                                                        <!-- 用户图片 -->
+                                                        <img src="bower_components/AdminLTE/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                                                    </div>
+                                                    <!-- 消息标题和时间戳-->
+                                                    <h4>
+                                                        Support Team
+                                                        <small>
+                                                            <i class="fa fa-clock-o"></i>
+                                                            5 mins</small>
+                                                    </h4>
+                                                    <!--消息 -->
+                                                    <p>Why not buy a new awesome theme?</p>
+                                                </a>
+                                            </li>
+                                            <!-- 消息结束 -->
+                                        </ul>
+                                        <!-- /.menu菜单结束 -->
+                                    </li>
+                                    <li class="footer">
+                                        <a href="#">See All Messages</a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <!-- 通知栏 -->
+                            <li class="dropdown notifications-menu">
+                                <!-- Menu toggle button -->
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="fa fa-bell-o"></i>
+                                    <span class="label label-warning">10</span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li class="header">You have 10 notifications</li>
+                                    <li>
+                                        <!-- Inner Menu: contains the notifications -->
+                                        <ul class="menu">
+                                            <li>
+                                                <!-- start notification -->
+                                                <a href="#">
+                                                    <i class="fa fa-users text-aqua"></i>
+                                                    5 new members joined today
+                                                </a>
+                                            </li>
+                                            <!-- end notification -->
+                                        </ul>
+                                    </li>
+                                    <li class="footer">
+                                        <a href="#">View all</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <!-- 任务栏 -->
+                            <li class="dropdown tasks-menu">
+                                <!-- Menu Toggle Button -->
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="fa fa-flag-o"></i>
+                                    <span class="label label-danger">9</span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li class="header">You have 9 tasks</li>
+                                    <li>
+                                        <!-- Inner menu: contains the tasks -->
+                                        <ul class="menu">
+                                            <li>
+                                                <!-- Task item -->
+                                                <a href="#">
+                                                    <!-- Task title and progress text -->
+                                                    <h3>
+                                                        Design some buttons
+                                                        <small class="pull-right">20%</small>
+                                                    </h3>
+                                                    <!-- The progress bar -->
+                                                    <div class="progress xs">
+                                                        <!-- Change the css width attribute to simulate progress -->
+                                                        <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                                                            <span class="sr-only">20% Complete</span>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <!-- end task item -->
+                                        </ul>
+                                    </li>
+                                    <li class="footer">
+                                        <a href="#">View all tasks</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <!-- 用户账户栏 -->
+                            <li class="dropdown user user-menu"></li>
+                            <!-- 控制属性侧边栏 -->
+                            <li>
+                                <a href="#" data-toggle="control-sidebar">
+                                    <i class="fa fa-gears"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </header>
+            <!-- 左边栏. 包含logo 和 sidebar -->
+            <aside class="main-sidebar">
+                <section class="sidebar">
+                    <!-- 侧边菜单栏 -->
+                    <ul class="sidebar-menu">
+                        <li class="header">导航</li>
+                        <!-- Optionally, you can add icons to the links -->
+                        <li class="active">
+                            <a href="#/staffs">
+                                <i class="fa fa-link"></i>
+                                <span><msg key="userManger"></msg></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#/anotherLink">
+                                <i class="fa fa-signal"></i>
+                                <span>Another Link</span>
+                            </a>
+                        </li>
+                        <li class="treeview">
+                            <a>
+                                <i class="fa fa-link"></i>
+                                <span>Multilevel</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li>
+                                    <a href="#/f">Link in level 2</a>
+                                </li>
+                                <li>
+                                    <a href="#/dsf">Link in level 2</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
+            </aside>
+
+            <!-- 内容展示页面 -->
+            <div class="content-wrapper">
+                <!-- 实时消息展示栏 -->
+                <div ng-class="'alert alert-' + message().type" ng-show="message().show">
+                    <button type="button" class="close" ng-click="message().show = false">×</button>
+                    <msg key-expr="message().text"></msg>
+                </div>
+                <div ui-view></div>
+            </div>
+
+            <!-- Main Footer -->
+            <footer class="main-footer">
+                <!-- To the right -->
+                <div class="pull-right hidden-xs">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="btn-group btn-group-sm">
+                                <a class="btn btn-default" ng-class="(language() == 'zh_CN') ? 'btn-primary' : ''" ng-click="setLanguage('zh_CN')">简体中文</a>
+                                <a class="btn btn-default" ng-class="(language() == 'en') ? 'btn-primary' : ''" ng-click="setLanguage('en')">English</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Default to the left -->
+                <strong>Copyright &copy; 2015
+                    <a href="#">Phuag</a>.</strong>
+                保留所有权利.
+            </footer>
+
+            <!-- 控制边栏 -->
+            <aside class="control-sidebar control-sidebar-dark"></aside>
+            <!-- Add the sidebar's background. This div must be placed
+           immediately after the control sidebar -->
+            <div class="control-sidebar-bg"></div>
+        </div>
+        <!-- jQuery 2.2.0 -->
+        <script src="bower_components/jquery/dist/jquery.min.js"></script>
+        <!-- Bootstrap 3.3.6 -->
+        <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <!-- AdminLTE App -->
+        <script src="bower_components/AdminLTE/dist/js/app.min.js"></script>
+
+        <script type="text/javascript" src="bower_components/jquery-i18n-properties/jquery.i18n.properties.js"></script>
+        <script type="text/javascript" src="bower_components/angular/angular.js"></script>
+        <script type="text/javascript" src="bower_components/angular-aria/angular-aria.js"></script>
+        <script type="text/javascript" src="bower_components/angular-animate/angular-animate.js"></script>
+        <script type="text/javascript" src="bower_components/angular-cookies/angular-cookies.js"></script>
+        <script type="text/javascript" src="bower_components/angular-messages/angular-messages.js"></script>
+        <script type="text/javascript" src="bower_components/angular-resource/angular-resource.js"></script>
+        <script type="text/javascript" src="bower_components/angular-touch/angular-touch.js"></script>
+        <script type="text/javascript" src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+        <script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+        <script type="text/javascript" src="bower_components/bootstrap-material-design/dist/js/material.js"></script>
+        <script type="text/javascript" src="bower_components/bootstrap-material-design/dist/js/ripples.js"></script>
+        <script type="text/javascript" src="js/i18n.js"></script>
+        <script type="text/javascript" src="js/controller.js"></script>
+        <script type="text/javascript" src="js/filter.js"></script>
+        <script type="text/javascript" src="js/base64.js"></script>
+        <script type="text/javascript" src="js/init.js"></script>
+        <script>
+            $.material.init();
+        </script>
+    </body>
+</html>

@@ -2,6 +2,7 @@ package com.phuag.sample.controller;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.phuag.sample.Constants;
 import com.phuag.sample.model.Staff;
 import com.phuag.sample.service.StaffService;
@@ -43,11 +44,11 @@ public class StaffController {
     //page stuff is config to controller layer,i wonder if it was the best way
     @RequestMapping(value = "", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<Page<Staff>> getAllStaff(@PageableDefault(page = 0, size = 10, sort = "staffId", direction = Direction.DESC) Pageable page) {
+    public ResponseEntity<PageInfo<Staff>> getAllStaff(@PageableDefault(page = 0, size = 10, sort = "staffId", direction = Direction.DESC) Pageable page) {
         log.debug("get all staffInfo " );
-        Page<Staff> staff = (Page<Staff>) staffService.getAllStaff(page);
-        log.debug("get allStaff, num:" + staff.size());
-        return new ResponseEntity<Page<Staff>>(staff, HttpStatus.OK);
+        PageInfo<Staff> staff =  staffService.getAllStaff(page);
+        log.debug("get allStaff, num:" + staff.getPageSize());
+        return new ResponseEntity<PageInfo<Staff>>(staff, HttpStatus.OK);
     }
 
 
